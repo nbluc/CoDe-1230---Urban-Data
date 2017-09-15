@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<!--
+    Hielo by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+    <head>
+        <title>CoDe1230</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+        <script src='./data29.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+    </head>
+    <body class="subpage">
+
+        <!-- Header -->
+            <header id="header">
+                <div class="logo"><a href="index.html">CoDe1230 <span>Urban Data</span></a></div>
+                <a href="#menu">Menu</a>
+            </header>
+
+        <!-- Nav -->
+            <nav id="menu">
+                <ul class="links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Our Data</a></li>
+                    <li><a href="story.html">Our story</a></li>
+                    <li><a href="map19.html">Projected G19 Map</a></li>
+                    <li><a href="map29.html">Projected G29 Map</a></li>     
+                </ul>
+            </nav>
+
+        <!-- One -->
+            <section id="One" class="wrapper style3">
+                <div class="inner">
+                    <header class="align-center">
+                        <p>Voluntary Work for an Organisation or Group by Age by Sex</p>
+                        <h2>Projected G29 Map</h2>
+                    </header>
+                </div>
+            </section>
+
+     <!-- Two -->
+            <section id="two" class="wrapper style2">
+             <style>
+                #text {
+                    top:0px;
+                    padding-left:100px;
+                    padding-right:100px;
+                }
+                </style>
+                <div id='text'>
+                <p>G29 has been overlayed on this map as to show the disparity between Weekly household incomes on either side of the latte line. Focusing on households that earn 4000 or more AUD per week. With the use of a black and white gradient, it is quite clear that the North Shore and CBD areas earn on average, per family, more than the Southern and Western Suburbs. However it is also noticeable that the West’s average income is increasing as areas such as Parramatta are seeing a rise in individuals earning over 4000AUD a week.</p>
+                </div>
+                                <style>
+                                    #map { 
+                                        position:absolute;
+                                        top: 200px;
+                                        width: 100%;
+                                        height: 800px;
+                                    }
+                                </style>
+                            <div id='map'>
+                            </div>
+                            <script>
+                            mapboxgl.accessToken = 'pk.eyJ1IjoibGlzYWRvYW45OCIsImEiOiJjajZ2bmR6cjgweHd1Mnd1aHZ1Z3FxOXliIn0.SXfbKj86AX_ayoXyDtk4bQ';
+                            var map = new mapboxgl.Map({
+                            container: 'map',
+                            style: 'mapbox://styles/mapbox/light-v9',
+                            center: [151, -34],
+                            zoom: 9,
+                            pitch: 40,
+                            bearing: 20
+                            });
+                            map.on('load', function() {
+
+                                map.addLayer({
+                                    'id': 'data29',
+                                    'type': 'fill-extrusion',
+                                    'source': {
+                                        // Geojson Data source used in vector tiles, documented at
+                                        // https://gist.github.com/ryanbaumann/a7d970386ce59d11c16278b90dde094d
+                                        'type': 'geojson',
+                                        'data': data
+                                    },
+                                    'paint': {
+                                        // See the Mapbox Style Spec for details on property functions
+                                        // https://www.mapbox.com/mapbox-gl-style-spec/#types-function
+                                        'fill-extrusion-color': {
+                                            // Get the fill-extrusion-color from the source 'color' property.
+                                            'property': '4000tot',
+                                            "stops": [
+                                                [0, 'black'],
+                                                [100,'white']
+                                                ]
+                                        },
+                                        'fill-extrusion-height': {
+                                            // Get fill-extrusion-height from the source 'height' property.
+                                            'property': '4000tot',
+                                            "stops": [
+                                                [0.2, 50],
+                                                [100, 5000]
+                                                ]
+                                        },
+                                        // Make extrusions slightly opaque for see through indoor walls.
+                                        'fill-extrusion-opacity': 0.9
+                                    }
+                                });
+                            });
+                            </script>
+
+             </section>
+
+        <!-- Footer -->
+            <footer id="footer">
+                <div class="copyright">
+                <p>Lisa and Nick</p>
+                </div>
+            </footer>
+
+        <!-- Scripts -->
+            <script src="assets/js/jquery.min.js"></script>
+            <script src="assets/js/jquery.scrollex.min.js"></script>
+            <script src="assets/js/skel.min.js"></script>
+            <script src="assets/js/util.js"></script>
+            <script src="assets/js/main.js"></script>
+
+    </body>
+</html>
